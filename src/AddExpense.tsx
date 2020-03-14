@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { TextField, InputAdornment, makeStyles, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import {
+    TextField,
+    InputAdornment,
+    makeStyles,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+    Grid,
+} from '@material-ui/core';
 import MoneyIcon from '@material-ui/icons/Money';
 import { AddForm } from './components/AddForm';
 import { ExpenseKind } from './expenseKind';
@@ -7,15 +16,22 @@ import { Expense } from './state/types';
 import { useDispatch } from 'react-redux';
 import { addExpense } from './state/actions';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     formRow: {
         display: 'flex',
         justifyContent: 'space-between',
     },
-    formRowItem: {
-        maxWidth: '49%',
+    formRowItemLeft: {
+        [theme.breakpoints.up('sm')]: {
+            paddingRight: theme.spacing(1),
+        },
     },
-});
+    formRowItemRight: {
+        [theme.breakpoints.up('sm')]: {
+            paddingLeft: theme.spacing(1),
+        },
+    },
+}));
 
 export const AddExpense: React.FC = () => {
     const classes = useStyles();
@@ -77,63 +93,65 @@ export const AddExpense: React.FC = () => {
                 }}
                 onChange={handleChange}
             />
-            <div className={classes.formRow}>
-                <FormControl margin="normal" fullWidth className={classes.formRowItem}>
-                    <InputLabel id="kind-select-label" variant="outlined">
-                        Kind
-                    </InputLabel>
-                    <Select
-                        labelId="kind-select-label"
-                        labelWidth={40}
-                        fullWidth
-                        value={formState.kind}
-                        variant="outlined"
-                        onChange={handleSelectChange}
-                    >
-                        <MenuItem value={ExpenseKind.Percentage}>Percentage</MenuItem>
-                        <MenuItem value={ExpenseKind.SplitEqually}>Split equally</MenuItem>
-                        <MenuItem value={ExpenseKind.SplitProportionally}>Split proportionally</MenuItem>
-                    </Select>
-                </FormControl>
-                {formState.kind === ExpenseKind.Percentage ? (
-                    <TextField
-                        label="Percentage"
-                        variant="outlined"
-                        margin="normal"
-                        name="payload"
-                        fullWidth
-                        InputProps={{
-                            endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                        }}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        type="number"
-                        inputProps={{
-                            min: 0,
-                            max: 100,
-                        }}
-                        value={formState.payload}
-                        className={classes.formRowItem}
-                        onChange={handleChange}
-                    />
-                ) : (
-                    <TextField
-                        label="Price"
-                        variant="outlined"
-                        margin="normal"
-                        name="payload"
-                        fullWidth
-                        InputProps={{
-                            startAdornment: <InputAdornment position="start">$</InputAdornment>,
-                        }}
-                        type="number"
-                        value={formState.payload}
-                        className={classes.formRowItem}
-                        onChange={handleChange}
-                    />
-                )}
-            </div>
+            <Grid container>
+                <Grid item xs={12} sm={6} className={classes.formRowItemLeft}>
+                    <FormControl margin="normal" fullWidth>
+                        <InputLabel id="kind-select-label" variant="outlined">
+                            Kind
+                        </InputLabel>
+                        <Select
+                            labelId="kind-select-label"
+                            labelWidth={40}
+                            fullWidth
+                            value={formState.kind}
+                            variant="outlined"
+                            onChange={handleSelectChange}
+                        >
+                            <MenuItem value={ExpenseKind.Percentage}>Percentage</MenuItem>
+                            <MenuItem value={ExpenseKind.SplitEqually}>Split equally</MenuItem>
+                            <MenuItem value={ExpenseKind.SplitProportionally}>Split proportionally</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6} className={classes.formRowItemRight}>
+                    {formState.kind === ExpenseKind.Percentage ? (
+                        <TextField
+                            label="Percentage"
+                            variant="outlined"
+                            margin="normal"
+                            name="payload"
+                            fullWidth
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                            }}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            type="number"
+                            inputProps={{
+                                min: 0,
+                                max: 100,
+                            }}
+                            value={formState.payload}
+                            onChange={handleChange}
+                        />
+                    ) : (
+                        <TextField
+                            label="Price"
+                            variant="outlined"
+                            margin="normal"
+                            name="payload"
+                            fullWidth
+                            InputProps={{
+                                startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                            }}
+                            type="number"
+                            value={formState.payload}
+                            onChange={handleChange}
+                        />
+                    )}
+                </Grid>
+            </Grid>
         </AddForm>
     );
 };

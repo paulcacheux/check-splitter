@@ -98,10 +98,10 @@ const App: React.FC = () => {
             <Container fixed>
                 <CheckTable />
                 <Grid container spacing={3}>
-                    <Grid item xs={4}>
+                    <Grid item xs={12} sm={4}>
                         <AddName />
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={12} sm={8}>
                         <AddExpense />
                     </Grid>
                 </Grid>
