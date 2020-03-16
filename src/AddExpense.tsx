@@ -5,7 +5,6 @@ import { AddForm } from './components/AddForm';
 import { ExpenseKind } from './expenseKind';
 import { useDispatch } from 'react-redux';
 import { addExpense } from './state/actions';
-import { Expense } from './state/types';
 import { PriceInputField } from './components/PriceInputField';
 
 const useStyles = makeStyles(theme => ({
@@ -55,12 +54,7 @@ export const AddExpense: React.FC = () => {
 
     const handleSubmit = (): void => {
         if (formState.name !== '' && formState.payload && formState.payload > 0) {
-            const expense: Expense = {
-                name: formState.name,
-                kind: formState.kind,
-                payload: formState.payload,
-            };
-            dispatch(addExpense(expense));
+            dispatch(addExpense(formState.name, formState.kind, formState.payload));
             setFormState({
                 name: '',
                 kind: ExpenseKind.SplitEqually,

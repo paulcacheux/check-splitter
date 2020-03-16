@@ -1,4 +1,5 @@
-import { ADD_PERSON, ADD_EXPENSE, Person, Expense, RESET_STATE } from './types';
+import { ADD_PERSON, ADD_EXPENSE, RESET_STATE } from './types';
+import { ExpenseKind } from '../expenseKind';
 
 export interface ResetAction {
     type: typeof RESET_STATE;
@@ -6,12 +7,15 @@ export interface ResetAction {
 
 export interface AddPersonAction {
     type: typeof ADD_PERSON;
-    person: Person;
+    name: string;
+    basePrice: number;
 }
 
 export interface AddExpenseAction {
     type: typeof ADD_EXPENSE;
-    expense: Expense;
+    name: string;
+    kind: ExpenseKind;
+    payload: number;
 }
 
 export type RootAction = ResetAction | AddPersonAction | AddExpenseAction;
@@ -22,16 +26,19 @@ export const resetState = (): ResetAction => {
     };
 };
 
-export const addPerson = (person: Person): AddPersonAction => {
+export const addPerson = (name: string, basePrice: number): AddPersonAction => {
     return {
         type: ADD_PERSON,
-        person,
+        name,
+        basePrice,
     };
 };
 
-export const addExpense = (expense: Expense): AddExpenseAction => {
+export const addExpense = (name: string, kind: ExpenseKind, payload: number): AddExpenseAction => {
     return {
         type: ADD_EXPENSE,
-        expense,
+        name,
+        kind,
+        payload,
     };
 };

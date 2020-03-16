@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { TextField } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import { AddForm } from './components/AddForm';
-import { Person } from './state/types';
 import { useDispatch } from 'react-redux';
 import { addPerson } from './state/actions';
 import { PriceInputField } from './components/PriceInputField';
@@ -24,11 +23,7 @@ export const AddName: React.FC = () => {
 
     const handleSubmit = (): void => {
         if (formState.name !== '' && formState.basePrice && formState.basePrice > 0) {
-            const person: Person = {
-                name: formState.name,
-                basePrice: formState.basePrice,
-            };
-            dispatch(addPerson(person));
+            dispatch(addPerson(formState.name, formState.basePrice));
             setFormState({
                 name: '',
                 basePrice: undefined,

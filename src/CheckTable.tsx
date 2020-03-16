@@ -71,15 +71,15 @@ export const CheckTable: React.FC = () => {
                             return (
                                 <TableRow key={index}>
                                     <TableCell align="left">{person.person.name}</TableCell>
-                                    <TableCell align="right">{person.person.basePrice}</TableCell>
+                                    <TableCell align="right">{person.person.basePrice.toFixed(2)}</TableCell>
                                     {person.expenses.map((expense, index) => {
                                         return (
                                             <TableCell align="right" key={index}>
-                                                {expense}
+                                                {expense.toFixed(2)}
                                             </TableCell>
                                         );
                                     })}
-                                    <TableCell align="right">{person.total}</TableCell>
+                                    <TableCell align="right">{person.total.toFixed(2)}</TableCell>
                                 </TableRow>
                             );
                         })}
