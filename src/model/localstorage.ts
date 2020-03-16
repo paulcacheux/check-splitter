@@ -1,4 +1,4 @@
-import { State } from '../state/types';
+import { State } from '../state/reducers';
 
 const LOCAL_STORAGE_KEY = 'check-splitter-state';
 

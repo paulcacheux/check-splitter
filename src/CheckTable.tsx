@@ -12,8 +12,8 @@ import {
     createStyles,
 } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-import { State } from './state/types';
 import { computeExpenses } from './model/calculator';
+import { peopleSelector, expensesSelector } from './state/selectors';
 
 interface Row {
     name: string;
@@ -43,8 +43,8 @@ const useStyles = makeStyles(theme => ({
 export const CheckTable: React.FC = () => {
     const classes = useStyles();
 
-    const people = useSelector((state: State) => state.people);
-    const expenses = useSelector((state: State) => state.expenses);
+    const people = useSelector(peopleSelector);
+    const expenses = useSelector(expensesSelector);
 
     const peopleWithExpenses = computeExpenses(people, expenses);
 

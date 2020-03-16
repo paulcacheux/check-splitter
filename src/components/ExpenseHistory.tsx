@@ -9,9 +9,10 @@ import {
     IconButton,
 } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-import { State, Expense } from '../state/types';
+import { Expense } from '../state/types';
 import { ExpenseKind, expenseKindToString } from '../expenseKind';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { expensesSelector } from '../state/selectors';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -37,7 +38,7 @@ const ExpenseHistoryItem: React.FC<{ expense: Expense }> = ({ expense }) => {
 
 export const ExpenseHistory: React.FC = () => {
     const classes = useStyles();
-    const expenses = useSelector((state: State) => state.expenses);
+    const expenses = useSelector(expensesSelector);
 
     if (expenses.length === 0) {
         return null;

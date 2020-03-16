@@ -15,7 +15,5 @@ export interface Expense {
     kind: ExpenseKind;
 }
 
-export interface State {
-    people: Array<Person>;
-    expenses: Array<Expense>;
-}
+export type PeopleState = Array<Person>;
+export type ExpensesState = Array<Expense>;
