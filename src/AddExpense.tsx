@@ -1,20 +1,12 @@
 import React, { useState } from 'react';
-import {
-    TextField,
-    InputAdornment,
-    makeStyles,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
-    Grid,
-} from '@material-ui/core';
+import { TextField, makeStyles, FormControl, InputLabel, Select, MenuItem, Grid } from '@material-ui/core';
 import MoneyIcon from '@material-ui/icons/Money';
 import { AddForm } from './components/AddForm';
 import { ExpenseKind } from './expenseKind';
-import { Expense } from './state/types';
 import { useDispatch } from 'react-redux';
 import { addExpense } from './state/actions';
+import { Expense } from './state/types';
+import { PriceInputField } from './components/PriceInputField';
 
 const useStyles = makeStyles(theme => ({
     formRow: {
@@ -33,34 +25,24 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+interface ExpenseFormState {
+    name: string;
+    kind: ExpenseKind;
+    payload?: number;
+}
+
 export const AddExpense: React.FC = () => {
     const classes = useStyles();
 
-    const [formState, setFormState] = useState<Expense>({
+    const [formState, setFormState] = useState<ExpenseFormState>({
         name: '',
         kind: ExpenseKind.SplitEqually,
-        payload: 0,
     });
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const fieldName = event.target.name;
-        const fieldValue = event.target.value;
-
-        switch (fieldName) {
-            case 'name':
-                setFormState(state => ({ ...state, name: fieldValue }));
-                break;
-            case 'kind':
-                break;
-            case 'payload':
-                let payload = parseFloat(fieldValue);
-                if (isNaN(payload)) {
-                    payload = 0.0;
-                }
-                setFormState(state => ({ ...state, payload }));
-                break;
-            default:
-                break;
+    const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        if (event.target) {
+            const value = event.target.value;
+            setFormState(state => ({ ...state, name: value }));
         }
     };
 
@@ -72,12 +54,19 @@ export const AddExpense: React.FC = () => {
     const dispatch = useDispatch();
 
     const handleSubmit = (): void => {
-        dispatch(addExpense(formState));
-        setFormState({
-            name: '',
-            kind: ExpenseKind.SplitEqually,
-            payload: 0,
-        });
+        if (formState.name !== '' && formState.payload && formState.payload > 0) {
+            const expense: Expense = {
+                name: formState.name,
+                kind: formState.kind,
+                payload: formState.payload,
+            };
+            dispatch(addExpense(expense));
+            setFormState({
+                name: '',
+                kind: ExpenseKind.SplitEqually,
+                payload: undefined,
+            });
+        }
     };
 
     return (
@@ -91,7 +80,8 @@ export const AddExpense: React.FC = () => {
                 InputLabelProps={{
                     shrink: true,
                 }}
-                onChange={handleChange}
+                value={formState.name}
+                onChange={handleNameChange}
             />
             <Grid container>
                 <Grid item xs={12} sm={6} className={classes.formRowItemLeft}>
@@ -114,42 +104,14 @@ export const AddExpense: React.FC = () => {
                     </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={6} className={classes.formRowItemRight}>
-                    {formState.kind === ExpenseKind.Percentage ? (
-                        <TextField
-                            label="Percentage"
-                            variant="outlined"
-                            margin="normal"
-                            name="payload"
-                            fullWidth
-                            InputProps={{
-                                endAdornment: <InputAdornment position="end">%</InputAdornment>,
-                            }}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            type="number"
-                            inputProps={{
-                                min: 0,
-                                max: 100,
-                            }}
-                            value={formState.payload}
-                            onChange={handleChange}
-                        />
-                    ) : (
-                        <TextField
-                            label="Price"
-                            variant="outlined"
-                            margin="normal"
-                            name="payload"
-                            fullWidth
-                            InputProps={{
-                                startAdornment: <InputAdornment position="start">$</InputAdornment>,
-                            }}
-                            type="number"
-                            value={formState.payload}
-                            onChange={handleChange}
-                        />
-                    )}
+                    <PriceInputField
+                        label="Price"
+                        name="price"
+                        percentage={formState.kind === ExpenseKind.Percentage}
+                        handleChange={(price: number | undefined): void => {
+                            setFormState(state => ({ ...state, payload: price }));
+                        }}
+                    />
                 </Grid>
             </Grid>
         </AddForm>

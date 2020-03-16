@@ -1,44 +1,39 @@
 import React, { useState } from 'react';
-import { TextField, InputAdornment } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import { AddForm } from './components/AddForm';
 import { Person } from './state/types';
 import { useDispatch } from 'react-redux';
 import { addPerson } from './state/actions';
+import { PriceInputField } from './components/PriceInputField';
+
+interface PersonFormState {
+    name: string;
+    basePrice?: number;
+}
 
 export const AddName: React.FC = () => {
-    const [formState, setFormState] = useState<Person>({
-        name: '',
-        basePrice: 0,
-    });
+    const [formState, setFormState] = useState<PersonFormState>({ name: '' });
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const fieldName = event.target.name;
-        const fieldValue = event.target.value;
-        switch (fieldName) {
-            case 'name':
-                setFormState(state => ({ ...state, name: fieldValue }));
-                break;
-            case 'basePrice':
-                let basePrice = parseFloat(fieldValue);
-                if (isNaN(basePrice)) {
-                    basePrice = 0.0;
-                }
-                setFormState(state => ({ ...state, basePrice }));
-                break;
-            default:
-                break;
-        }
+    const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        const value = event.target.value;
+        setFormState(state => ({ ...state, name: value }));
     };
 
     const dispatch = useDispatch();
 
     const handleSubmit = (): void => {
-        dispatch(addPerson(formState));
-        setFormState({
-            name: '',
-            basePrice: 0,
-        });
+        if (formState.name !== '' && formState.basePrice && formState.basePrice > 0) {
+            const person: Person = {
+                name: formState.name,
+                basePrice: formState.basePrice,
+            };
+            dispatch(addPerson(person));
+            setFormState({
+                name: '',
+                basePrice: undefined,
+            });
+        }
     };
 
     return (
@@ -53,20 +48,14 @@ export const AddName: React.FC = () => {
                 InputLabelProps={{
                     shrink: true,
                 }}
-                onChange={handleChange}
+                onChange={handleNameChange}
             />
-            <TextField
+            <PriceInputField
                 label="Base Price"
-                variant="outlined"
-                margin="normal"
                 name="basePrice"
-                value={formState.basePrice}
-                fullWidth
-                InputProps={{
-                    startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                handleChange={(price: number | undefined): void => {
+                    setFormState(state => ({ ...state, basePrice: price }));
                 }}
-                type="number"
-                onChange={handleChange}
             />
         </AddForm>
     );
