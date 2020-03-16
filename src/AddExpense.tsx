@@ -108,6 +108,7 @@ export const AddExpense: React.FC = () => {
                         label="Price"
                         name="price"
                         percentage={formState.kind === ExpenseKind.Percentage}
+                        value={formState.payload}
                         handleChange={(price: number | undefined): void => {
                             setFormState(state => ({ ...state, payload: price }));
                         }}

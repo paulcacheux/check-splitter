@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TextField, InputAdornment } from '@material-ui/core';
 
 export interface PriceInputProps {
     label: string;
     name: string;
     percentage?: boolean;
+    value?: number;
     handleChange(price: number | undefined): void;
 }
 
-export const PriceInputField: React.FC<PriceInputProps> = ({ label, name, percentage, handleChange }) => {
-    const [payload, setPayload] = useState<number | undefined>(undefined);
-
+export const PriceInputField: React.FC<PriceInputProps> = ({ label, name, percentage, value, handleChange }) => {
     const innerHandleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         let payload: number | undefined = parseFloat(event.target.value);
         if (isNaN(payload)) {
             payload = undefined;
         }
-        setPayload(payload);
         handleChange(payload);
     };
 
@@ -39,7 +37,7 @@ export const PriceInputField: React.FC<PriceInputProps> = ({ label, name, percen
                     min: 0,
                     max: 100,
                 }}
-                value={payload || ''}
+                value={value || ''}
                 onChange={innerHandleChange}
             />
         );
@@ -50,7 +48,7 @@ export const PriceInputField: React.FC<PriceInputProps> = ({ label, name, percen
                 variant="outlined"
                 margin="normal"
                 name={name}
-                value={payload || ''}
+                value={value || ''}
                 fullWidth
                 InputProps={{
                     startAdornment: <InputAdornment position="start">$</InputAdornment>,

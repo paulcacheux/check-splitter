@@ -1,28 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {
-    AppBar,
-    Toolbar,
-    IconButton,
-    Typography,
-    Container,
-    Grid,
-    Drawer,
-    CssBaseline,
-    Divider,
-    List,
-    ListItem,
-    ListItemText,
-    ListItemIcon,
-} from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, Container, Grid, CssBaseline } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import { CheckTable } from './CheckTable';
 import { AddName } from './AddName';
 import { AddExpense } from './AddExpense';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { resetState } from './state/actions';
+import { LeftMenu } from './components/LeftMenu';
+import { ExpenseHistory } from './components/ExpenseHistory';
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
@@ -31,44 +15,7 @@ const useStyles = makeStyles(theme => ({
     title: {
         flexGrow: 1,
     },
-
-    drawerHeader: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing(0, 1),
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
-    },
 }));
-
-const LeftMenu: React.FC<{ open: boolean; closeCallback(): void }> = ({ open, closeCallback }) => {
-    const classes = useStyles();
-    const dispatch = useDispatch();
-
-    const handleReset = (): void => {
-        dispatch(resetState());
-        closeCallback();
-    };
-
-    return (
-        <Drawer open={open}>
-            <div className={classes.drawerHeader}>
-                <IconButton onClick={closeCallback}>
-                    <ChevronLeftIcon />
-                </IconButton>
-            </div>
-            <Divider />
-            <List>
-                <ListItem button onClick={handleReset}>
-                    <ListItemIcon>
-                        <DeleteIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Reset" />
-                </ListItem>
-            </List>
-        </Drawer>
-    );
-};
 
 const App: React.FC = () => {
     const classes = useStyles();
@@ -105,6 +52,7 @@ const App: React.FC = () => {
                         <AddExpense />
                     </Grid>
                 </Grid>
+                <ExpenseHistory />
             </Container>
         </React.Fragment>
     );

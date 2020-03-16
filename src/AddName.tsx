@@ -53,6 +53,7 @@ export const AddName: React.FC = () => {
             <PriceInputField
                 label="Base Price"
                 name="basePrice"
+                value={formState.basePrice}
                 handleChange={(price: number | undefined): void => {
                     setFormState(state => ({ ...state, basePrice: price }));
                 }}
