@@ -1,8 +1,17 @@
 import React from 'react';
-import { List, ListItem, ListItemText, Paper, makeStyles } from '@material-ui/core';
+import {
+    List,
+    ListItem,
+    ListItemText,
+    Paper,
+    makeStyles,
+    ListItemSecondaryAction,
+    IconButton,
+} from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { State, Expense } from '../state/types';
 import { ExpenseKind, expenseKindToString } from '../expenseKind';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -17,6 +26,11 @@ const ExpenseHistoryItem: React.FC<{ expense: Expense }> = ({ expense }) => {
     return (
         <ListItem>
             <ListItemText primary={primaryText} secondary={expenseKindToString(expense.kind)} />
+            <ListItemSecondaryAction>
+                <IconButton edge="end" aria-label="delete">
+                    <DeleteIcon />
+                </IconButton>
+            </ListItemSecondaryAction>
         </ListItem>
     );
 };

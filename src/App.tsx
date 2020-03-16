@@ -15,6 +15,10 @@ const useStyles = makeStyles(theme => ({
     title: {
         flexGrow: 1,
     },
+    container: {
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+    },
 }));
 
 const App: React.FC = () => {
@@ -42,7 +46,7 @@ const App: React.FC = () => {
                 </Toolbar>
             </AppBar>
             <LeftMenu open={isMenuOpened} closeCallback={(): void => setMenuOpened(false)} />
-            <Container fixed>
+            <Container fixed className={classes.container}>
                 <CheckTable />
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={4}>
