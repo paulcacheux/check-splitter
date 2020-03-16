@@ -8,11 +8,12 @@ import {
     ListItemSecondaryAction,
     IconButton,
 } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Expense } from '../state/types';
 import { ExpenseKind, expenseKindToString } from '../expenseKind';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { expensesSelector } from '../state/selectors';
+import { removeExpense } from '../state/actions';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -24,11 +25,17 @@ const ExpenseHistoryItem: React.FC<{ expense: Expense }> = ({ expense }) => {
     const payloadFormatted = expense.kind === ExpenseKind.Percentage ? `${expense.payload}%` : `$${expense.payload}`;
     const primaryText = `${expense.name} - ${payloadFormatted}`;
 
+    const dispatch = useDispatch();
+
+    const handleClick = (): void => {
+        dispatch(removeExpense(expense.id));
+    };
+
     return (
         <ListItem>
             <ListItemText primary={primaryText} secondary={expenseKindToString(expense.kind)} />
             <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton edge="end" onClick={handleClick}>
                     <DeleteIcon />
                 </IconButton>
             </ListItemSecondaryAction>

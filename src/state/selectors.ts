@@ -6,5 +6,5 @@ export const peopleSelector = (state: State): Array<Person> => {
 };
 
 export const expensesSelector = (state: State): Array<Expense> => {
-    return state.expenses;
+    return state.expenses.expenses;
 };
