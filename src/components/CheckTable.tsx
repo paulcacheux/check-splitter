@@ -12,8 +12,8 @@ import {
     createStyles,
 } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-import { computeExpenses } from './model/calculator';
-import { peopleSelector, expensesSelector } from './state/selectors';
+import { computeExpenses } from '../model/calculator';
+import { peopleSelector, expensesSelector } from '../state/selectors';
 
 interface Row {
     name: string;

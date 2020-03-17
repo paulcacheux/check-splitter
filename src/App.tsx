@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { AppBar, Toolbar, IconButton, Typography, Container, Grid, CssBaseline } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
-import { CheckTable } from './CheckTable';
-import { AddName } from './AddName';
-import { AddExpense } from './AddExpense';
+import { CheckTable } from './components/CheckTable';
+import { AddName } from './components/AddName';
+import { AddExpense } from './components/AddExpense';
 import { LeftMenu } from './components/LeftMenu';
 import { ExpenseHistory } from './components/ExpenseHistory';
 

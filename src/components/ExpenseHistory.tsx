@@ -54,8 +54,8 @@ export const ExpenseHistory: React.FC = () => {
     return (
         <Paper className={classes.root} elevation={3}>
             <List>
-                {expenses.map((expense, index) => {
-                    return <ExpenseHistoryItem expense={expense} key={index} />;
+                {expenses.map(expense => {
+                    return <ExpenseHistoryItem expense={expense} key={expense.id} />;
                 })}
             </List>
         </Paper>
