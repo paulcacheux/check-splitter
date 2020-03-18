@@ -96,7 +96,7 @@ export const CheckTable: React.FC = () => {
                         <TableRow>
                             <StyledTableCell align="left">Total</StyledTableCell>
                             <StyledTableCell align="right" colSpan={expenses.length + 2}>
-                                {total}
+                                {total.toFixed(2)}
                             </StyledTableCell>
                         </TableRow>
                     </TableFooter>
