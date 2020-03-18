@@ -7,6 +7,7 @@ import { AddName } from './components/AddName';
 import { AddExpense } from './components/AddExpense';
 import { LeftMenu } from './components/LeftMenu';
 import { ExpenseHistory } from './components/ExpenseHistory';
+import { Calculator } from './components/Calculator';
 
 const useStyles = makeStyles(theme => ({
     menuButton: {
@@ -56,6 +57,7 @@ const App: React.FC = () => {
                         <AddExpense />
                     </Grid>
                 </Grid>
+                <Calculator />
                 <ExpenseHistory />
             </Container>
         </React.Fragment>
