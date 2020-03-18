@@ -50,10 +50,10 @@ const App: React.FC = () => {
             <Container fixed className={classes.container}>
                 <CheckTable />
                 <Grid container spacing={3}>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item sm={12} md={4}>
                         <AddName />
                     </Grid>
-                    <Grid item xs={12} sm={8}>
+                    <Grid item sm={12} md={8}>
                         <AddExpense />
                     </Grid>
                 </Grid>
