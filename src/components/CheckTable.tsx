@@ -10,6 +10,7 @@ import {
     makeStyles,
     withStyles,
     createStyles,
+    TableFooter,
 } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { computeExpenses } from '../model/calculator';
@@ -26,6 +27,12 @@ const StyledTableCell = withStyles(theme => {
         head: {
             backgroundColor: theme.palette.secondary.main,
             color: theme.palette.common.white,
+            fontWeight: 'bold',
+        },
+        footer: {
+            color: theme.palette.primary.main,
+            fontWeight: 'bold',
+            fontSize: '1.1em',
         },
     });
 })(TableCell);
@@ -47,6 +54,7 @@ export const CheckTable: React.FC = () => {
     const expenses = useSelector(expensesSelector);
 
     const peopleWithExpenses = computeExpenses(people, expenses);
+    const total = peopleWithExpenses.map(people => people.total).reduce((a, b) => a + b, 0);
 
     return (
         <Paper className={classes.root} elevation={3}>
@@ -84,6 +92,14 @@ export const CheckTable: React.FC = () => {
                             );
                         })}
                     </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                            <StyledTableCell align="left">Total</StyledTableCell>
+                            <StyledTableCell align="right" colSpan={expenses.length + 2}>
+                                {total}
+                            </StyledTableCell>
+                        </TableRow>
+                    </TableFooter>
                 </Table>
             </TableContainer>
         </Paper>
