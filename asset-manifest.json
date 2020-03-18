@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/check-splitter/static/js/main.db4797c2.chunk.js",
-    "main.js.map": "/check-splitter/static/js/main.db4797c2.chunk.js.map",
+    "main.js": "/check-splitter/static/js/main.adf6b411.chunk.js",
+    "main.js.map": "/check-splitter/static/js/main.adf6b411.chunk.js.map",
     "runtime-main.js": "/check-splitter/static/js/runtime-main.e27fc686.js",
     "runtime-main.js.map": "/check-splitter/static/js/runtime-main.e27fc686.js.map",
     "static/js/2.dc853080.chunk.js": "/check-splitter/static/js/2.dc853080.chunk.js",
     "static/js/2.dc853080.chunk.js.map": "/check-splitter/static/js/2.dc853080.chunk.js.map",
     "index.html": "/check-splitter/index.html",
-    "precache-manifest.b257e332ecae74e2affb830d0b5ca355.js": "/check-splitter/precache-manifest.b257e332ecae74e2affb830d0b5ca355.js",
+    "precache-manifest.29c637c747479834f6c4fed91a8f7e60.js": "/check-splitter/precache-manifest.29c637c747479834f6c4fed91a8f7e60.js",
     "service-worker.js": "/check-splitter/service-worker.js",
     "static/js/2.dc853080.chunk.js.LICENSE.txt": "/check-splitter/static/js/2.dc853080.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e27fc686.js",
     "static/js/2.dc853080.chunk.js",
-    "static/js/main.db4797c2.chunk.js"
+    "static/js/main.adf6b411.chunk.js"
   ]
 }
