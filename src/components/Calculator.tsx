@@ -83,7 +83,7 @@ export const Calculator: React.FC = () => {
             </form>
             {result && (
                 <Paper elevation={2} className={classes.result}>
-                    <Typography variant="subtitle1"> = {result}</Typography>
+                    <Typography variant="subtitle1"> = {result.toFixed(2)}</Typography>
                 </Paper>
             )}
         </Paper>
