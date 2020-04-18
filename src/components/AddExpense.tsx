@@ -53,7 +53,7 @@ export const AddExpense: React.FC = () => {
     const dispatch = useDispatch();
 
     const handleSubmit = (): void => {
-        if (formState.name !== '' && formState.payload && formState.payload > 0) {
+        if (formState.name !== '' && formState.payload && formState.payload) {
             dispatch(addExpense(formState.name, formState.kind, formState.payload));
             setFormState({
                 name: '',

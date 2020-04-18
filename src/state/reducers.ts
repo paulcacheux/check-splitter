@@ -10,6 +10,7 @@ import {
 import { RootAction } from './actions';
 import { convertToCents } from './utils';
 import { combineReducers } from 'redux';
+import { ExpenseKind } from '../expenseKind';
 
 const peopleReducer = (state: PeopleState = [], action: RootAction): PeopleState => {
     switch (action.type) {
@@ -26,11 +27,12 @@ const peopleReducer = (state: PeopleState = [], action: RootAction): PeopleState
 const expensesReducer = (state: ExpensesState = defaultExpensesState, action: RootAction): ExpensesState => {
     switch (action.type) {
         case ADD_EXPENSE:
+            const payload = action.kind === ExpenseKind.Percentage ? action.payload : convertToCents(action.payload);
             const expense = {
                 id: state.counter,
                 name: action.name,
                 kind: action.kind,
-                payload: convertToCents(action.payload),
+                payload,
             };
             return {
                 counter: state.counter + 1,

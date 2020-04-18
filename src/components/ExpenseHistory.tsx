@@ -21,9 +21,21 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const formatExpensePayload = (kind: ExpenseKind, payload: number): string => {
+    if (kind === ExpenseKind.Percentage) {
+        return `${payload}%`;
+    } else {
+        const dollars = (Math.abs(payload) / 100).toFixed(2);
+        if (payload >= 0) {
+            return `$${dollars}`;
+        } else {
+            return `-$${dollars}`;
+        }
+    }
+};
+
 const ExpenseHistoryItem: React.FC<{ expense: Expense }> = ({ expense }) => {
-    const payloadFormatted = expense.kind === ExpenseKind.Percentage ? `${expense.payload}%` : `$${expense.payload}`;
-    const primaryText = `${expense.name} - ${payloadFormatted}`;
+    const primaryText = `${expense.name}: ${formatExpensePayload(expense.kind, expense.payload)}`;
 
     const dispatch = useDispatch();
 

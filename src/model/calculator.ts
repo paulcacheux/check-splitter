@@ -1,6 +1,19 @@
 import { Person, Expense } from '../state/types';
 import { ExpenseKind } from '../expenseKind';
 
+const equilibrate = (prices: Array<number>, targetPrice: number): Array<number> => {
+    const res = prices.map(p => Math.floor(p));
+
+    const currentPrice = res.reduce((curr, v) => curr + v, 0);
+    const neededCents = targetPrice - currentPrice;
+
+    for (let i = 0; i < neededCents; i++) {
+        res[i] += 1;
+    }
+
+    return res;
+};
+
 export class PersonWithExpenses {
     person: Person;
     expenses: Array<number>;
@@ -16,19 +29,8 @@ export class PersonWithExpenses {
         return this.person.basePrice + this.expenses.reduce((a, b) => a + b, 0);
     }
 
-    addExpense(payload: number, kind: ExpenseKind, peopleCount: number, totalBasePrice: number): void {
-        switch (kind) {
-            case ExpenseKind.Percentage:
-                this.expenses.push((payload * this.getCurrentTotalPrice()) / 100);
-                break;
-            case ExpenseKind.SplitEqually:
-                this.expenses.push(payload / peopleCount);
-                break;
-            case ExpenseKind.SplitProportionally:
-                const percent = this.person.basePrice / totalBasePrice;
-                this.expenses.push(percent * payload);
-                break;
-        }
+    addExpense(expense: number): void {
+        this.expenses.push(expense);
     }
 
     finalize(): void {
@@ -39,12 +41,37 @@ export class PersonWithExpenses {
 export const computeExpenses = (people: Array<Person>, expenses: Array<Expense>): Array<PersonWithExpenses> => {
     const peopleCount = people.length;
     const totalBasePrice = people.map(person => person.basePrice).reduce((a, b) => a + b, 0);
-    return people.map(person => {
-        const personWithExpenses = new PersonWithExpenses(person);
-        for (const expense of expenses) {
-            personWithExpenses.addExpense(expense.payload, expense.kind, peopleCount, totalBasePrice);
-        }
-        personWithExpenses.finalize();
-        return personWithExpenses;
+
+    const peopleWithExpenses = people.map(person => {
+        return new PersonWithExpenses(person);
     });
+
+    for (const expense of expenses) {
+        let prices;
+        switch (expense.kind) {
+            case ExpenseKind.Percentage:
+                prices = peopleWithExpenses.map(person => {
+                    return (expense.payload * person.getCurrentTotalPrice()) / 100;
+                });
+                break;
+            case ExpenseKind.SplitEqually:
+                prices = Array.from({ length: peopleCount }, () => expense.payload / peopleCount);
+                break;
+            case ExpenseKind.SplitProportionally:
+                prices = peopleWithExpenses.map(person => {
+                    const percent = person.person.basePrice / totalBasePrice;
+                    return percent * expense.payload;
+                });
+                break;
+        }
+
+        const finalPrices = equilibrate(prices, expense.payload);
+
+        peopleWithExpenses.forEach((person, index) => {
+            person.addExpense(finalPrices[index]);
+        });
+    }
+
+    peopleWithExpenses.forEach(person => person.finalize());
+    return peopleWithExpenses;
 };
