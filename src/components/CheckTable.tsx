@@ -47,6 +47,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const numberDisplay = (value: number): string => {
+    return (value / 100).toFixed(2);
+};
+
 export const CheckTable: React.FC = () => {
     const classes = useStyles();
 
@@ -79,15 +83,15 @@ export const CheckTable: React.FC = () => {
                             return (
                                 <TableRow key={index}>
                                     <TableCell align="left">{person.person.name}</TableCell>
-                                    <TableCell align="right">{person.person.basePrice.toFixed(2)}</TableCell>
+                                    <TableCell align="right">{numberDisplay(person.person.basePrice)}</TableCell>
                                     {person.expenses.map((expense, index) => {
                                         return (
                                             <TableCell align="right" key={index}>
-                                                {expense.toFixed(2)}
+                                                {numberDisplay(expense)}
                                             </TableCell>
                                         );
                                     })}
-                                    <TableCell align="right">{person.total.toFixed(2)}</TableCell>
+                                    <TableCell align="right">{numberDisplay(person.total)}</TableCell>
                                 </TableRow>
                             );
                         })}
@@ -96,7 +100,7 @@ export const CheckTable: React.FC = () => {
                         <TableRow>
                             <StyledTableCell align="left">Total</StyledTableCell>
                             <StyledTableCell align="right" colSpan={expenses.length + 2}>
-                                {total.toFixed(2)}
+                                {numberDisplay(total)}
                             </StyledTableCell>
                         </TableRow>
                     </TableFooter>

@@ -8,12 +8,13 @@ import {
     REMOVE_EXPENSE,
 } from './types';
 import { RootAction } from './actions';
+import { convertToCents } from './utils';
 import { combineReducers } from 'redux';
 
 const peopleReducer = (state: PeopleState = [], action: RootAction): PeopleState => {
     switch (action.type) {
         case ADD_PERSON:
-            const person = { name: action.name, basePrice: action.basePrice };
+            const person = { name: action.name, basePrice: convertToCents(action.basePrice) };
             return [...state, person];
         case RESET_STATE:
             return [];
@@ -25,7 +26,12 @@ const peopleReducer = (state: PeopleState = [], action: RootAction): PeopleState
 const expensesReducer = (state: ExpensesState = defaultExpensesState, action: RootAction): ExpensesState => {
     switch (action.type) {
         case ADD_EXPENSE:
-            const expense = { id: state.counter, name: action.name, kind: action.kind, payload: action.payload };
+            const expense = {
+                id: state.counter,
+                name: action.name,
+                kind: action.kind,
+                payload: convertToCents(action.payload),
+            };
             return {
                 counter: state.counter + 1,
                 expenses: [...state.expenses, expense],
