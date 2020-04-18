@@ -6,7 +6,7 @@ export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
 
 // Last changed when adding ids to expenses
-export const stateVersion = 1;
+export const stateVersion = 2;
 
 export interface Person {
     name: string;
