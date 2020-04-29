@@ -36,6 +36,7 @@ export const PriceInputField: React.FC<PriceInputProps> = ({ label, name, percen
                 inputProps={{
                     min: 0,
                     max: 100,
+                    step: 0.01,
                 }}
                 value={value || ''}
                 onChange={innerHandleChange}
@@ -52,6 +53,9 @@ export const PriceInputField: React.FC<PriceInputProps> = ({ label, name, percen
                 fullWidth
                 InputProps={{
                     startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                }}
+                inputProps={{
+                    step: 0.01,
                 }}
                 type="number"
                 onChange={innerHandleChange}
