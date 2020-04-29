@@ -3,7 +3,7 @@ import { TextField } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import { AddForm } from './AddForm';
 import { useDispatch } from 'react-redux';
-import { addPerson } from '../state/actions';
+import { addPerson, editPerson } from '../state/actions';
 import { PriceInputField } from './PriceInputField';
 
 interface PersonFormState {
@@ -11,13 +11,28 @@ interface PersonFormState {
     basePrice?: number;
 }
 
-interface NameEditProps {
+interface InnerNameProps {
     title: string;
-    editId?: number;
+    editProps?: EditProps;
 }
 
-const NameEdit: React.FC<NameEditProps> = ({ title, editId }) => {
-    const [formState, setFormState] = useState<PersonFormState>({ name: '' });
+interface EditProps {
+    editId: number;
+    name: string;
+    currentPrice: number;
+    handleDidSubmit?(): void;
+}
+
+const InnerName: React.FC<InnerNameProps> = ({ title, editProps }) => {
+    let basePrice = undefined;
+    const currentPrice = editProps?.currentPrice;
+    if (currentPrice) {
+        basePrice = currentPrice / 100;
+    }
+    const [formState, setFormState] = useState<PersonFormState>({
+        name: editProps?.name || '',
+        basePrice,
+    });
 
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const value = event.target.value;
@@ -28,8 +43,8 @@ const NameEdit: React.FC<NameEditProps> = ({ title, editId }) => {
 
     const handleSubmit = (): void => {
         if (formState.name !== '' && formState.basePrice && formState.basePrice > 0) {
-            if (editId) {
-                console.log('Edit dispatch: ' + editId);
+            if (editProps) {
+                dispatch(editPerson(editProps.editId, formState.basePrice));
             } else {
                 dispatch(addPerson(formState.name, formState.basePrice));
             }
@@ -37,11 +52,12 @@ const NameEdit: React.FC<NameEditProps> = ({ title, editId }) => {
                 name: '',
                 basePrice: undefined,
             });
+            editProps?.handleDidSubmit && editProps.handleDidSubmit();
         }
     };
 
     return (
-        <AddForm title={title} Icon={PersonIcon} handleSubmit={handleSubmit}>
+        <AddForm title={title} Icon={PersonIcon} handleSubmit={handleSubmit} edit={editProps !== undefined}>
             <TextField
                 label="Name"
                 variant="outlined"
@@ -67,5 +83,9 @@ const NameEdit: React.FC<NameEditProps> = ({ title, editId }) => {
 };
 
 export const AddName: React.FC = () => {
-    return <NameEdit title="Add a new person" />;
+    return <InnerName title="Add a new person" />;
+};
+
+export const EditName: React.FC<EditProps> = props => {
+    return <InnerName title="Edit" editProps={props} />;
 };

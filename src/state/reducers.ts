@@ -6,6 +6,7 @@ import {
     ExpensesState,
     defaultExpensesState,
     REMOVE_EXPENSE,
+    EDIT_PERSON,
 } from './types';
 import { RootAction } from './actions';
 import { convertToCents } from './utils';
@@ -17,6 +18,14 @@ const peopleReducer = (state: PeopleState = [], action: RootAction): PeopleState
         case ADD_PERSON:
             const person = { name: action.name, basePrice: convertToCents(action.basePrice) };
             return [...state, person];
+        case EDIT_PERSON:
+            return state.map((person, index) => {
+                if (index === action.editId) {
+                    return { ...person, basePrice: convertToCents(action.newBasePrice) };
+                } else {
+                    return person;
+                }
+            });
         case RESET_STATE:
             return [];
         default:
