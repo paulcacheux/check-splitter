@@ -19,14 +19,6 @@ import { peopleSelector, expensesSelector } from '../state/selectors';
 import EditIcon from '@material-ui/icons/Edit';
 import { EditName } from './AddName';
 
-/*
-interface Row {
-    name: string;
-    basePrice: number;
-    tip: number;
-}
-*/
-
 const StyledTableCell = withStyles(theme => {
     return createStyles({
         head: {
