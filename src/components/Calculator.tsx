@@ -45,7 +45,7 @@ export const Calculator: React.FC = () => {
         try {
             const value = evaluate(content);
             setResult(value);
-        } catch (err) {
+        } catch (err: any) {
             setError(err.message || err.toString());
         }
     };

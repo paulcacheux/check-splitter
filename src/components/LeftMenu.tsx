@@ -20,10 +20,10 @@ const reloadServiceWorker = (): void => {
     navigator.serviceWorker.getRegistration().then(function(reg) {
         if (reg) {
             reg.unregister().then(function() {
-                window.location.reload(true);
+                window.location.reload();
             });
         } else {
-            window.location.reload(true);
+            window.location.reload();
         }
     });
 };
