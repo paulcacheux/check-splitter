@@ -1,19 +1,10 @@
 {
   "files": {
-    "main.js": "/check-splitter/static/js/main.b66f48be.chunk.js",
-    "main.js.map": "/check-splitter/static/js/main.b66f48be.chunk.js.map",
-    "runtime-main.js": "/check-splitter/static/js/runtime-main.45788670.js",
-    "runtime-main.js.map": "/check-splitter/static/js/runtime-main.45788670.js.map",
-    "static/js/2.ea5de5d8.chunk.js": "/check-splitter/static/js/2.ea5de5d8.chunk.js",
-    "static/js/2.ea5de5d8.chunk.js.map": "/check-splitter/static/js/2.ea5de5d8.chunk.js.map",
+    "main.js": "/check-splitter/static/js/main.2ea6a531.js",
     "index.html": "/check-splitter/index.html",
-    "precache-manifest.9d6033b1633f23983720751a616ed35f.js": "/check-splitter/precache-manifest.9d6033b1633f23983720751a616ed35f.js",
-    "service-worker.js": "/check-splitter/service-worker.js",
-    "static/js/2.ea5de5d8.chunk.js.LICENSE.txt": "/check-splitter/static/js/2.ea5de5d8.chunk.js.LICENSE.txt"
+    "main.2ea6a531.js.map": "/check-splitter/static/js/main.2ea6a531.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.45788670.js",
-    "static/js/2.ea5de5d8.chunk.js",
-    "static/js/main.b66f48be.chunk.js"
+    "static/js/main.2ea6a531.js"
   ]
 }
