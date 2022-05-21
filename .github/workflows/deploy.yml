@@ -18,7 +18,7 @@ jobs:
           
       - name: Build application
         run: |
-          npm build
+          npm run build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@releases/v3
