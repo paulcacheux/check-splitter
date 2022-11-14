@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, makeStyles, FormControl, InputLabel, Select, MenuItem, Grid } from '@mui/material';
+import { TextField, FormControl, InputLabel, Select, MenuItem, Grid } from '@mui/material';
 import MoneyIcon from '@mui/icons-material/Money';
 import { AddForm } from './AddForm';
 import { ExpenseKind } from '../expenseKind';
@@ -7,22 +7,17 @@ import { useDispatch } from 'react-redux';
 import { addExpense } from '../state/actions';
 import { PriceInputField } from './PriceInputField';
 
-const useStyles = makeStyles(theme => ({
-    formRow: {
-        display: 'flex',
-        justifyContent: 'space-between',
-    },
-    formRowItemLeft: {
-        [theme.breakpoints.up('sm')]: {
-            paddingRight: theme.spacing(1),
-        },
-    },
-    formRowItemRight: {
-        [theme.breakpoints.up('sm')]: {
-            paddingLeft: theme.spacing(1),
-        },
-    },
-}));
+const formRowItemLeft = {
+    paddingRight: {
+        sm: 1
+    }
+}
+
+const formRowItemRight = {
+    paddingLeft: {
+        sm: 1
+    }
+}
 
 interface ExpenseFormState {
     name: string;
@@ -31,8 +26,6 @@ interface ExpenseFormState {
 }
 
 export const AddExpense: React.FC = () => {
-    const classes = useStyles();
-
     const [formState, setFormState] = useState<ExpenseFormState>({
         name: '',
         kind: ExpenseKind.SplitEqually,
@@ -78,7 +71,7 @@ export const AddExpense: React.FC = () => {
                 onChange={handleNameChange}
             />
             <Grid container>
-                <Grid item xs={12} sm={6} className={classes.formRowItemLeft}>
+                <Grid item xs={12} sm={6} sx={formRowItemLeft}>
                     <FormControl margin="normal" fullWidth>
                         <InputLabel id="kind-select-label" variant="outlined">
                             Kind
@@ -97,7 +90,7 @@ export const AddExpense: React.FC = () => {
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={6} className={classes.formRowItemRight}>
+                <Grid item xs={12} sm={6} sx={formRowItemRight}>
                     <PriceInputField
                         label="Price"
                         name="price"
