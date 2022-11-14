@@ -34,23 +34,11 @@ const StyledTableCell = withStyles(theme => {
     });
 })(TableCell);
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        width: '100%',
-        marginBottom: theme.spacing(2),
-    },
-    table: {
-        maxHeight: '50vh',
-    },
-}));
-
 const numberDisplay = (value: number): string => {
     return (value / 100).toFixed(2);
 };
 
 export const CheckTable: React.FC = () => {
-    const classes = useStyles();
-
     const [currentEdit, setCurrentEdit] = useState<number | null>(null);
 
     const people = useSelector(peopleSelector);
@@ -68,8 +56,8 @@ export const CheckTable: React.FC = () => {
     };
 
     return (
-        <Paper className={classes.root} elevation={3}>
-            <TableContainer className={classes.table}>
+        <Paper sx={{width: '100vw', marginBottom: 2}} elevation={3}>
+            <TableContainer sx={{maxHeight: '50vh'}}>
                 <Table stickyHeader>
                     <TableHead>
                         <TableRow>

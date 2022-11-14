@@ -2,19 +2,9 @@ import React from 'react';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CachedIcon from '@mui/icons-material/Cached';
-import { makeStyles, Drawer, IconButton, Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Drawer, IconButton, Divider, List, ListItem, ListItemIcon, ListItemText, Box } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { resetState } from '../state/actions';
-
-const useStyles = makeStyles(theme => ({
-    drawerHeader: {
-        display: 'flex',
-        alignItems: 'center',
-        padding: theme.spacing(0, 1),
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
-    },
-}));
 
 const reloadServiceWorker = (): void => {
     navigator.serviceWorker.getRegistration().then(function(reg) {
@@ -29,7 +19,6 @@ const reloadServiceWorker = (): void => {
 };
 
 export const LeftMenu: React.FC<{ open: boolean; closeCallback(): void }> = ({ open, closeCallback }) => {
-    const classes = useStyles();
     const dispatch = useDispatch();
 
     const handleReset = (): void => {
@@ -37,13 +26,21 @@ export const LeftMenu: React.FC<{ open: boolean; closeCallback(): void }> = ({ o
         closeCallback();
     };
 
+    const drawHeaderSx = (theme: any) => ({
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: theme.spacing(0, 1),
+        ...theme.mixins.toolbar,
+    })
+
     return (
         <Drawer open={open}>
-            <div className={classes.drawerHeader}>
+            <Box sx={drawHeaderSx}>
                 <IconButton onClick={closeCallback}>
                     <ChevronLeftIcon />
                 </IconButton>
-            </div>
+            </Box>
             <Divider />
             <List>
                 <ListItem button onClick={handleReset}>
