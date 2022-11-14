@@ -78,7 +78,7 @@ export const AddExpense: React.FC = () => {
                         </InputLabel>
                         <Select
                             labelId="kind-select-label"
-                            // labelWidth={40}
+                            label="Kind"
                             fullWidth
                             value={formState.kind}
                             variant="outlined"

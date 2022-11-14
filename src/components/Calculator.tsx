@@ -43,6 +43,7 @@ export const Calculator: React.FC = () => {
                     <InputLabel htmlFor="calculator-input">Input</InputLabel>
                     <OutlinedInput
                         id="calculator-input"
+                        label="Input"
                         value={content}
                         onChange={(event): void => {
                             setContent(event.target.value);
@@ -54,7 +55,6 @@ export const Calculator: React.FC = () => {
                                 </Button>
                             </InputAdornment>
                         }
-                        // labelWidth={40}
                     />
                 </FormControl>
             </form>
