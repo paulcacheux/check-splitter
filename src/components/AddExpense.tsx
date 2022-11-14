@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, FormControl, InputLabel, Select, MenuItem, Grid } from '@mui/material';
+import { TextField, FormControl, InputLabel, Select, MenuItem, Grid, SelectChangeEvent } from '@mui/material';
 import MoneyIcon from '@mui/icons-material/Money';
 import { AddForm } from './AddForm';
 import { ExpenseKind } from '../expenseKind';
@@ -38,10 +38,10 @@ export const AddExpense: React.FC = () => {
         }
     };
 
-    const handleSelectChange = (event: React.ChangeEvent<{ name?: string; value: unknown }>): void => {
+    const handleSelectChange = (event: SelectChangeEvent<ExpenseKind>): void => {
         const value = event.target.value as ExpenseKind;
         setFormState(state => ({ ...state, kind: value }));
-    };
+    }
 
     const dispatch = useDispatch();
 
@@ -78,7 +78,7 @@ export const AddExpense: React.FC = () => {
                         </InputLabel>
                         <Select
                             labelId="kind-select-label"
-                            labelWidth={40}
+                            // labelWidth={40}
                             fullWidth
                             value={formState.kind}
                             variant="outlined"

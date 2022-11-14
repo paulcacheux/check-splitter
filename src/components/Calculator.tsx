@@ -54,7 +54,7 @@ export const Calculator: React.FC = () => {
                                 </Button>
                             </InputAdornment>
                         }
-                        labelWidth={40}
+                        // labelWidth={40}
                     />
                 </FormControl>
             </form>

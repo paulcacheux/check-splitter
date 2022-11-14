@@ -7,6 +7,7 @@ interface AddFormProps {
     edit?: boolean;
     Icon(props: SvgIconProps): JSX.Element;
     handleSubmit?(event: React.FormEvent<HTMLFormElement>): void;
+    children?: React.ReactNode;
 }
 
 export const AddForm: React.FC<AddFormProps> = ({ title, edit, Icon, handleSubmit, children }) => {

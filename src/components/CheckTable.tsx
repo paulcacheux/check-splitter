@@ -7,9 +7,6 @@ import {
     TableRow,
     TableCell,
     TableBody,
-    makeStyles,
-    withStyles,
-    createStyles,
     TableFooter,
     IconButton,
 } from '@mui/material';
@@ -19,6 +16,7 @@ import { peopleSelector, expensesSelector } from '../state/selectors';
 import EditIcon from '@mui/icons-material/Edit';
 import { EditName } from './AddName';
 
+/*
 const StyledTableCell = withStyles(theme => {
     return createStyles({
         head: {
@@ -33,6 +31,8 @@ const StyledTableCell = withStyles(theme => {
         },
     });
 })(TableCell);
+*/
+const StyledTableCell = TableCell;
 
 const numberDisplay = (value: number): string => {
     return (value / 100).toFixed(2);
