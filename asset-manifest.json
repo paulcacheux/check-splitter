@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/check-splitter/static/js/main.bf02b0a0.js",
+    "main.js": "/check-splitter/static/js/main.7ad8c63b.js",
     "index.html": "/check-splitter/index.html",
-    "main.bf02b0a0.js.map": "/check-splitter/static/js/main.bf02b0a0.js.map"
+    "main.7ad8c63b.js.map": "/check-splitter/static/js/main.7ad8c63b.js.map"
   },
   "entrypoints": [
-    "static/js/main.bf02b0a0.js"
+    "static/js/main.7ad8c63b.js"
   ]
 }
