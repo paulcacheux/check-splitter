@@ -29,22 +29,6 @@ const StyledTableCell = styled(TableCell)(({theme}) => ({
         fontSize: '1.1em',
     },
 }))
-/*
-const StyledTableCell = withStyles(theme => {
-    return createStyles({
-        head: {
-            backgroundColor: theme.palette.secondary.main,
-            color: theme.palette.common.white,
-            fontWeight: 'bold',
-        },
-        footer: {
-            color: theme.palette.primary.main,
-            fontWeight: 'bold',
-            fontSize: '1.1em',
-        },
-    });
-})(TableCell);
-*/
 
 const numberDisplay = (value: number): string => {
     return (value / 100).toFixed(2);
