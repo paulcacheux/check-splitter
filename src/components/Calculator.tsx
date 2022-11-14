@@ -9,8 +9,8 @@ import {
     InputLabel,
     OutlinedInput,
     InputAdornment,
-} from '@material-ui/core';
-import DialPadIcon from '@material-ui/icons/Dialpad';
+} from '@mui/material';
+import DialPadIcon from '@mui/icons-material/Dialpad';
 import { evaluate } from '../maths/parser';
 
 const useStyles = makeStyles(theme => ({

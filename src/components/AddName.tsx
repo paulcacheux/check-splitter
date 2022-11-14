@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { TextField } from '@material-ui/core';
-import PersonIcon from '@material-ui/icons/Person';
+import { TextField } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
 import { AddForm } from './AddForm';
 import { useDispatch } from 'react-redux';
 import { addPerson, editPerson } from '../state/actions';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, InputAdornment } from '@material-ui/core';
+import { TextField, InputAdornment } from '@mui/material';
 
 export interface PriceInputProps {
     label: string;

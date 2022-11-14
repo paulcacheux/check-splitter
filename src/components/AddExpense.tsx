@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { TextField, makeStyles, FormControl, InputLabel, Select, MenuItem, Grid } from '@material-ui/core';
-import MoneyIcon from '@material-ui/icons/Money';
+import { TextField, makeStyles, FormControl, InputLabel, Select, MenuItem, Grid } from '@mui/material';
+import MoneyIcon from '@mui/icons-material/Money';
 import { AddForm } from './AddForm';
 import { ExpenseKind } from '../expenseKind';
 import { useDispatch } from 'react-redux';

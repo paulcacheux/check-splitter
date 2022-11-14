@@ -12,11 +12,11 @@ import {
     createStyles,
     TableFooter,
     IconButton,
-} from '@material-ui/core';
+} from '@mui/material';
 import { useSelector } from 'react-redux';
 import { computeExpenses } from '../model/calculator';
 import { peopleSelector, expensesSelector } from '../state/selectors';
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from '@mui/icons-material/Edit';
 import { EditName } from './AddName';
 
 const StyledTableCell = withStyles(theme => {

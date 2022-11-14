@@ -4,22 +4,15 @@ import {
     ListItem,
     ListItemText,
     Paper,
-    makeStyles,
     ListItemSecondaryAction,
     IconButton,
-} from '@material-ui/core';
+} from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { Expense } from '../state/types';
 import { ExpenseKind, expenseKindToString } from '../expenseKind';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { expensesSelector } from '../state/selectors';
 import { removeExpense } from '../state/actions';
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        marginTop: theme.spacing(2),
-    },
-}));
 
 const formatExpensePayload = (kind: ExpenseKind, payload: number): string => {
     if (kind === ExpenseKind.Percentage) {
@@ -56,7 +49,6 @@ const ExpenseHistoryItem: React.FC<{ expense: Expense }> = ({ expense }) => {
 };
 
 export const ExpenseHistory: React.FC = () => {
-    const classes = useStyles();
     const expenses = useSelector(expensesSelector);
 
     if (expenses.length === 0) {
@@ -64,7 +56,7 @@ export const ExpenseHistory: React.FC = () => {
     }
 
     return (
-        <Paper className={classes.root} elevation={3}>
+        <Paper sx={{marginTop: 2}} elevation={3}>
             <List>
                 {expenses.map(expense => {
                     return <ExpenseHistoryItem expense={expense} key={expense.id} />;

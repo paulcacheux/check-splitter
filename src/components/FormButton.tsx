@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
-import EditIcon from '@material-ui/icons/Edit';
+import { Button } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
 
 export const FormButton: React.FC<{ edit: boolean }> = ({ edit }) => {
     if (edit) {

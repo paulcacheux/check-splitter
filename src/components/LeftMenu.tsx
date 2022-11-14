@@ -1,8 +1,8 @@
 import React from 'react';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CachedIcon from '@material-ui/icons/Cached';
-import { makeStyles, Drawer, IconButton, Divider, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CachedIcon from '@mui/icons-material/Cached';
+import { makeStyles, Drawer, IconButton, Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { resetState } from '../state/actions';
 
