@@ -15,7 +15,20 @@ import { computeExpenses } from '../model/calculator';
 import { peopleSelector, expensesSelector } from '../state/selectors';
 import EditIcon from '@mui/icons-material/Edit';
 import { EditName } from './AddName';
+import { styled } from '@mui/material/styles';
 
+const StyledTableCell = styled(TableCell)(({theme}) => ({
+    '&.MuiTableCell-head': {
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.common.white,
+        fontWeight: 'bold',
+    },
+    '&.MuiTableCell-footer': {
+        color: theme.palette.primary.main,
+        fontWeight: 'bold',
+        fontSize: '1.1em',
+    },
+}))
 /*
 const StyledTableCell = withStyles(theme => {
     return createStyles({
@@ -32,7 +45,6 @@ const StyledTableCell = withStyles(theme => {
     });
 })(TableCell);
 */
-const StyledTableCell = TableCell;
 
 const numberDisplay = (value: number): string => {
     return (value / 100).toFixed(2);
@@ -56,7 +68,7 @@ export const CheckTable: React.FC = () => {
     };
 
     return (
-        <Paper sx={{width: '100vw', marginBottom: 2}} elevation={3}>
+        <Paper sx={{width: '100%', marginBottom: 2}} elevation={3}>
             <TableContainer sx={{maxHeight: '50vh'}}>
                 <Table stickyHeader>
                     <TableHead>
