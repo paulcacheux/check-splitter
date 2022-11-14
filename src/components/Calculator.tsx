@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+    Alert,
     Paper,
     makeStyles,
     Typography,
@@ -11,7 +12,6 @@ import {
 } from '@material-ui/core';
 import DialPadIcon from '@material-ui/icons/Dialpad';
 import { evaluate } from '../maths/parser';
-import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles(theme => ({
     root: {
