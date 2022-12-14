@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { Paper, Typography, SvgIconProps } from '@mui/material';
 import { FormButton } from './FormButton';
 
 interface AddFormProps {
     title: string;
     edit?: boolean;
-    Icon(props: SvgIconProps): JSX.Element;
+    Icon: ComponentType<SvgIconProps>;
     handleSubmit?(event: React.FormEvent<HTMLFormElement>): void;
     children?: React.ReactNode;
 }
@@ -20,9 +20,9 @@ export const AddForm: React.FC<AddFormProps> = ({ title, edit, Icon, handleSubmi
     };
 
     return (
-        <Paper elevation={3} sx={{padding: 2}}>
-            <div style={{display: 'flex', alignItems: 'center'}}>
-                <Icon fontSize="large" sx={{marginRight: 1}} />
+        <Paper elevation={3} sx={{ padding: 2 }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Icon fontSize="large" sx={{ marginRight: 1 }} />
                 <Typography variant="h5">{title}</Typography>
             </div>
             <form onSubmit={preventAndHandleSubmit}>
