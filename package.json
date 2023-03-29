@@ -22,7 +22,7 @@
         "@types/react": "^18.0.30",
         "@types/react-dom": "^18.0.11",
         "@types/react-redux": "^7.1.25",
-        "eslint": "^8.36.0"
+        "eslint": "^8.37.0"
     },
     "scripts": {
         "start": "react-scripts start",
